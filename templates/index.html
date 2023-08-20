@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>VrpVoraz</title>
+    <style>
+        body {
+            background-color: slategrey;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <center>
+        <h1>VrpVoraz</h1><br><br>
+        <button class="btn btn-dark" id="btnMostrar">Mostrar Mejor Ruta</button><br><br><br>
+        <div id="resultContainer"></div>
+
+        <script>
+            $(document).ready(function () {
+                $('#btnMostrar').click(function () {
+                    $.ajax({
+                        url: '/mostrar-rutas',
+                        method: 'GET',
+                        success: function (response) {
+                            var resultContainer = $('#resultContainer');
+                            resultContainer.empty();
+
+                            resultContainer.append('<h5> ' + response.rutas.join(' - - - - ') + '</h5><br>');
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            });
+        </script>
+    </center>
+</body>
+
+</html>
